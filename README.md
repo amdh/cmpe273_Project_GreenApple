@@ -3,7 +3,7 @@ project for semester1
 
 #Project Topic : Amazon Echo-enabled Pizza Ordering System
 
-#Team :
+#Team:GreenApple
 
 Chaya Malik
 Amruta Dhondage
