@@ -1,0 +1,10 @@
+
+
+1> Pizza data in spreadsheet
+2> Google spreadsheet api usage - create, write  and read
+3> write voice user interface
+4> Design intent schema
+5> write utterances
+6> create skill with invocation name on amazon developer portal
+7>create lambda function
+8> Integration of google spread api in lambda function
