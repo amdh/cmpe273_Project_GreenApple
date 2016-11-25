@@ -1,0 +1,26 @@
+{
+    "intents": [
+        {
+            "intent": "OrderPizza",
+            "slots": [
+                {
+                    "name": "size",
+                    "type": "LIST_OF_SIZE"
+                },
+                {
+                    "name": "name",
+                    "type": "LIST_OF_NAME"
+                }
+            ]
+        },{
+            "intent": "AMAZON.StopIntent",
+            "slots": []
+        },{
+            "intent": "AMAZON.HelpIntent",
+            "slots": []
+        },
+        {
+            "intent": "AMAZON.CancelIntent",
+            "slots": []
+    }]
+}

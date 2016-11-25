@@ -1,0 +1,131 @@
+//lambda function::
+
+
+
+//Test start session with applciationid
+
+{
+  "session": {
+    "new": true,
+    "sessionId": "amzn1.echo-api.session.d8bde69b-47ed-4226-9f3b-18a7b6f6abac",
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.d8bde69b-47ed-4226-9f3b-18a7b6f6abac"
+    },
+    "application": {
+      "applicationId": "amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac"
+    }
+  },
+  "version": "1.0",
+  "request": {
+    "locale": "en-US",
+    "timestamp": "2016-10-27T18:21:44Z",
+    "type": "LaunchRequest",
+    "requestId": "amzn1.echo-api.request.d8bde69b-47ed-4226-9f3b-18a7b6f6abac"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "device": {
+        "supportedInterfaces": {
+          "AudioPlayer": {}
+        }
+      },
+      "application": {
+        "applicationId": "amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.d8bde69b-47ed-4226-9f3b-18a7b6f6abac"
+      }
+    }
+  }
+}
+
+
+//output for orderpizza intent :
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "text": "I'm not sure what your favorite order is. Please try again.",
+      "type": "PlainText"
+    },
+    "shouldEndSession": false,
+    "reprompt": {
+      "outputSpeech": {
+        "text": "I'm not sure what your favorite order is. You can tell me your favorite order by saying, my favorite order is Nonveg Pizza.",
+        "type": "PlainText"
+      }
+    },
+    "card": {
+      "content": "SessionSpeechlet - I'm not sure what your favorite order is. Please try again.",
+      "type": "Simple",
+      "title": "SessionSpeechlet - MyOrderIntent"
+    }
+  },
+  "sessionAttributes": {}
+}
+
+Summary
+Code SHA-256
+RwQenVGA3kzk85otMIOpHNXIcPzSU0kV+WyDBj16lRY=
+Request ID
+1f0af03c-b2a4-11e6-9cb4-3de8754b7c00
+Duration
+0.31 ms
+Billed duration
+100 ms
+
+
+//request for orderpizza intent
+
+{
+  "session": {
+    "new": false,
+    "sessionId": "amzn1.echo-api.session.[unique-value-here]",
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.[unique-value-here]"
+    },
+    "application": {
+      "applicationId": "amzn1.ask.skill.[unique-value-here]"
+    }
+  },
+  "version": "1.0",
+  "request": {
+    "locale": "en-US",
+    "timestamp": "2016-10-27T21:06:28Z",
+    "type": "IntentRequest",
+    "requestId": "amzn1.echo-api.request.[unique-value-here]",
+    "intent": {
+      "slots": {
+        "size": {
+          "value":"medium"
+        }
+      },
+      "name": "OrderPizza"
+    }
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "device": {
+        "supportedInterfaces": {
+          "AudioPlayer": {}
+        }
+      },
+      "application": {
+        "applicationId": "amzn1.ask.skill.[unique-value-here]"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.[unique-value-here]"
+      }
+    }
+  }
+}
+
+
