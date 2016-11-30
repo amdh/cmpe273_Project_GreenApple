@@ -7,6 +7,39 @@
             "intent": "YesMenuIntent",
             "slots": []
         },{
+            "intent": "CustomMenuIntent",
+            "slots": []
+        },{
+            "intent": "CrustIntent",
+            "slots": [ {
+                    "name": "CrustItem",
+                    "type": "LIST_OF_CRUST"
+                }]
+        },{
+            "intent": "SauceIntent",
+            "slots": [ {
+                    "name": "SauceItem",
+                    "type": "LIST_OF_SAUCE"
+                }]
+        },{
+            "intent": "CheeseIntent",
+            "slots": [ {
+                    "name": "CheeseItem",
+                    "type": "LIST_OF_CHEESE"
+                }]
+        },{
+            "intent": "VegToppingsIntent",
+            "slots": [ {
+                    "name": "VegToppingsItem",
+                    "type": "LIST_OF_VEG_TOPPINGS"
+                }]
+        },{
+            "intent": "NonVegToppingsIntent",
+            "slots": [ {
+                    "name": "NonVegToppingsItem",
+                    "type": "LIST_OF_NONVEG_TOPPINGS"
+                }]
+        },{
             "intent": "MenuItemIntent",
             "slots": [   
                {
