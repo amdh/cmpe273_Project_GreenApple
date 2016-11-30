@@ -8,3 +8,17 @@
 6> create skill with invocation name on amazon developer portal
 7>create lambda function
 8> Integration of google spread api in lambda function
+
+
+
+future work:
+
+1> How to get text input from user e.g username 
+
+2? is it case sensitive?
+
+3> while giving values in slots 2 words are allowed?
+
+4? multipizza order?
+
+5>issue of switching between menu and custom order
