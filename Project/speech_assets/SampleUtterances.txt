@@ -1,5 +1,74 @@
-OrderPizza  place a pizza order at GreenApple PizzaCorner
-OrderPizza  I want to place a pizza order at GreenApple PizzaCorner
-OrderPizza  Ask GreenApple PizzaCornder to place a pizza order
-OrderPizza  order a pizza from GreenApple PizzaCorner
-OrderPizza  I would like to place a pizza order at GreenApple PizzaCorner
+OrderPizzaIntent  Place a pizza order at GreenApple PizzaCorner
+OrderPizzaIntent  I want to place a pizza order at GreenApple PizzaCorner
+OrderPizzaIntent  I wanna order a pizza from GreenApple PizzaCorner
+OrderPizzaIntent  Ask GreenApple PizzaCorner to order a pizza for me
+OrderPizzaIntent  Ask GreenApple PizzaCorner to order a pizza
+OrderPizzaIntent  order a pizza from GreenApple PizzaCorner
+OrderPizzaIntent  I would like to place a pizza order at GreenApple PizzaCorner
+OrderPizzaIntent  Can you order a pizza from GreenApple PizzaCorner
+OrderPizzaIntent  Use GreenApple PizzaCorner to order a pizza
+OrderPizzaIntent  Launch GreenApple PizzaCorner
+OrderPizzaIntent  Open GreenApple PizzaCorner
+OrderPizzaIntent  Start GreenApple PizzaCorner
+
+
+YesMenuIntent  I would like to order from Menu
+YesMenuIntent  What's in the Menu
+YesMenuIntent  What is the Menu
+YesMenuIntent  Can you tell me the Menu
+YesMenuIntent  Tell me the Menu
+YesMenuIntent  Please tell me the Menu
+YesMenuIntent  Choose from Menu
+YesMenuIntent  Yes
+YesMenuIntent  Yes I want to know the menu
+
+
+
+MenuItemIntent    I want {MenuItem}
+MenuItemIntent    I want {MenuItem} pizza
+MenuItemIntent    {MenuItem} pizza
+MenuItemIntent    I choose {MenuItem}
+MenuItemIntent    I would go with {MenuItem}
+MenuItemIntent    I would like to order {MenuItem}
+MenuItemIntent    {MenuItem} pizza
+
+SizeIntent    {size} size       
+SizeIntent    I want {size} size
+SizeIntent    {size} size pizza
+
+DispatchOrderIntent     I want {DispatchOption}
+DispatchOrderIntent     Make it {DispatchOption} Please
+DispatchOrderIntent     Its {DispatchOption}
+DispatchOrderIntent     It is a {DispatchOption} order
+DispatchOrderIntent     It will be a {DispatchOption} order
+DispatchOrderIntent     I will come and pick the order 
+DispatchOrderIntent     {DispatchOption}
+DispatchOrderIntent     I will come and {DispatchOption} the order
+DispatchOrderIntent     Its gonna be {DispatchOption}
+
+
+AddressIntent   {Address}
+AddressIntent   Its {Address}
+AddressIntent   It is {Address}
+AddressIntent   My location is {Address}
+AddressIntent   I live in {Address}
+AddressIntent   I stay at {Address}
+AddressIntent   Yeah its {Address}
+AddressIntent   Sure its {Address}
+
+
+CustomerInfoIntent  My name is {CustomerName}
+CustomerInfoIntent  {CustomerName}
+CustomerInfoIntent  Its {CustomerName}
+CustomerInfoIntent  Yes its {CustomerName}
+CustomerInfoIntent  Sure its {CustomerName}
+CustomerInfoIntent  Yeah its {CustomerName}
+
+AMAZON.HelpIntent	Help 
+AMAZON.HelpIntent	Help understanding GreenApple PizzaCorner
+AMAZON.HelpIntent	I need Help
+AMAZON.HelpIntent	I want to know about GreenApple PizzaCorner
+AMAZON.HelpIntent	How do I use GreenApple PizzaCorner
+AMAZON.HelpIntent	Please Help
+
+

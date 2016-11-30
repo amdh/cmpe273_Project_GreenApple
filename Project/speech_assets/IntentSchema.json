@@ -1,16 +1,50 @@
 {
     "intents": [
         {
-            "intent": "OrderPizza",
-            "slots": [
+            "intent": "OrderPizzaIntent",
+            "slots": []
+        }, {
+            "intent": "YesMenuIntent",
+            "slots": []
+        },{
+            "intent": "MenuItemIntent",
+            "slots": [   
+               {
+                    "name": "MenuItem",
+                    "type": "LIST_OF_MENUITEM"
+                }            
+            ]
+        },{
+            "intent": "SizeIntent",
+            "slots": [   
                 {
                     "name": "size",
                     "type": "LIST_OF_SIZE"
-                },
-                {
-                    "name": "name",
-                    "type": "LIST_OF_NAME"
-                }
+                }           
+            ]
+        },{
+            "intent": "DispatchOrderIntent",
+            "slots": [  
+                 {
+                    "name": "DispatchOption",
+                    "type": "LIST_OF_DISPATCH"
+                }              
+            ]
+        },{
+            "intent": "AddressIntent",
+            "slots": [   
+                 {
+                    "name": "Address",
+                    "type": "LIST_OF_LOCATION"
+                }              
+            ]
+        },{
+            "intent": "CustomerInfoIntent",
+            "slots": [   
+                 {
+                    "name": "CustomerName",
+                    "type": "LIST_OF_CUSTOMER_NAME"
+                }              
             ]
         },{
             "intent": "AMAZON.StopIntent",
@@ -22,5 +56,8 @@
         {
             "intent": "AMAZON.CancelIntent",
             "slots": []
-    }]
+        },
+      {"intent":"AMAZON.PauseIntent"}, 
+      {"intent":"AMAZON.ResumeIntent"} 
+      ]
 }
