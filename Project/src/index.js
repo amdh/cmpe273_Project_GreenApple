@@ -139,6 +139,36 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
         handleYesMenuIntentRequest(intent, session, response);
 
     },
+    "CustomMenuIntent": function (intent, session, response) {
+
+        handleCustomMenuIntentRequest(intent, session, response);
+
+    },
+    "CrustIntent": function (intent, session, response) {
+
+        handleCrustMenuIntentRequest(intent, session, response);
+
+    },
+    "SauceIntent": function (intent, session, response) {
+
+        handleSauceMenuIntentRequest(intent, session, response);
+
+    },
+    "CheeseIntent": function (intent, session, response) {
+
+        handleCheeseMenuIntentRequest(intent, session, response);
+
+    },
+    "VegToppingsIntent": function (intent, session, response) {
+
+        handleVegToppingsMenuIntentRequest(intent, session, response);
+
+    },
+    "NonVegToppingsIntent": function (intent, session, response) {
+
+        handleNonVegToppingsMenuIntentRequest(intent, session, response);
+
+    },
 
     "MenuItemIntent" :  function (intent , session, response){
          handleMenuItemDialogRequest(intent, session, response);
@@ -312,6 +342,94 @@ function handleYesMenuIntentRequest(intent, session , response){
 
     response.ask(speechOutput, repromptText);
 }
+function handleCustomMenuIntentRequest(intent, session , response){
+
+    var repromptText = "Please tell your choice of crust. Normal. Thin. Or Brooklyn"; //getCrustList()-integarte with google sheet apis;
+
+    var speechOutput = "Lets start making your pizza.   "
+
+             + repromptText;
+
+
+
+    response.ask(speechOutput, repromptText);
+}
+
+function handleCrustMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var crust = intent.slots.CrustItem;
+	session.attributes.crust  = crust.value;
+
+       
+       var repromptText = "Now please tell your choice of sauce. Marinara. Alfedo. Or Pesto"; //getSauceList()-integarte with google sheet apis;
+
+         var speechOutput = "You selected " + session.attributes.crust +" crust. " + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
+
+function handleSauceMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var sauce = intent.slots.SauceItem;
+	session.attributes.sauce  = sauce.value;
+
+       
+     var repromptText = "Now please tell your choice of cheese. Mozarella. Parmesan. and. Parmigiano Reggiano"; //getCheeseList()-integarte with google sheet apis;
+
+         var speechOutput = "You selected " + session.attributes.sauce +" sauce. " + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
+
+function handleCheeseMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var cheese = intent.slots.CheeseItem;
+	session.attributes.cheese  = cheese.value;
+
+       
+     var repromptText = "Now please tell your choice of vegetarian toppings. onion. tomato. greenpeppers. jalapeno. olives. mushrooms. or none. "; //getToppingsList()-integarte with google sheet apis;
+
+         var speechOutput = "You selected " + session.attributes.cheese +" cheese. " + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
+
+function handleVegToppingsMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var vegtop = intent.slots.VegToppingsItem;
+	session.attributes.vegtop  = vegtop.value;
+
+       
+     var repromptText = ". Now please tell your choice of non vegetarian toppings. ham. pepperoni. bacon. chicken. none. "; //getVegToppingsList()-integarte with google sheet apis;
+
+         var speechOutput = "For vegetarian toppings you selected. " + session.attributes.vegtop + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
+
+function handleNonVegToppingsMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var nonvegtop = intent.slots.NonVegToppingsItem;
+	session.attributes.nonvegtop  = nonvegtop.value;
+
+       
+     var repromptText = "Your custom pizza is. "+ session.attributes.crust + "crust. and has following ingredients. " + session.attributes.sauce + "sauce. "+ session.attributes.cheese + "cheese. " +session.attributes.vegtop + "in vegetarian toppings. " + session.attributes.nonvegtop + "in non vegetarian toppings. " + "Is this a pickup or delivery order. "; //getNonVegToppingsList()-integarte with google sheet apis;
+ 
+         var speechOutput = "You selected. "  + session.attributes.nonvegtop + "For non vegetarian toppings. " + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
+
 
 
 function handleMenuItemDialogRequest(intent, session , response){
