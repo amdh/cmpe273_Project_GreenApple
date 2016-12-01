@@ -34,12 +34,13 @@
 
  */
 
-var APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
+var APP_ID = 'amzn1.ask.skill.58287cfb-48d0-49bb-ac3a-d5571e077c60';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
 
 
 
 var http = require('http'),
 
+<<<<<<< HEAD
 alexaSheetUtil = require('./AlexaSpreadSheetUtil');
 var GoogleSpreadsheet = require('google-spreadsheet');
 var async = require('async');
@@ -55,6 +56,10 @@ async.series([
     var creds = require('./creds.json');
     doc.useServiceAccountAuth(creds, step);
   }]);
+=======
+    alexaSheetUtil = require('./AlexaSpreadSheetUtil');
+
+>>>>>>> 076955d94e3bfcbbc090b3939a8417f7b161847e
 
 
 /**
@@ -149,7 +154,13 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
 
     "MenuIntent": function (intent, session, response) {
 
+<<<<<<< HEAD
         handleMenuIntentRequest(intent, session, response);
+=======
+        session.attributes.menuOrder = true;
+
+        handleYesMenuIntentRequest(intent, session, response);
+>>>>>>> 076955d94e3bfcbbc090b3939a8417f7b161847e
 
     },
     "CustomMenuIntent": function (intent, session, response) {
@@ -182,8 +193,14 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
         handleNonVegToppingsMenuIntentRequest(intent, session, response);
 
     },
+    "SidesIntent": function (intent, session, response) {
+
+        handleSidesMenuIntentRequest(intent, session, response);
+
+    },
 
     "MenuItemIntent" :  function (intent , session, response){
+        
          handleMenuItemDialogRequest(intent, session, response);
     },
 
@@ -440,13 +457,27 @@ function handleNonVegToppingsMenuIntentRequest(intent, session , response){
 	session.attributes.nonvegtop  = nonvegtop.value;
 
        
-     var repromptText = "Your custom pizza is. "+ session.attributes.crust + "crust. and has following ingredients. " + session.attributes.sauce + "sauce. "+ session.attributes.cheese + "cheese. " +session.attributes.vegtop + "in vegetarian toppings. " + session.attributes.nonvegtop + "in non vegetarian toppings. " + "Is this a pickup or delivery order. "; //getNonVegToppingsList()-integarte with google sheet apis;
+     var repromptText = "Your custom pizza is. "+ session.attributes.crust + "crust. and has following ingredients. " + session.attributes.sauce + "sauce. "+ session.attributes.cheese + "cheese. " +session.attributes.vegtop + "in vegetarian toppings. " + session.attributes.nonvegtop + "in non vegetarian toppings. " + "Now please tell your choice of side. Garlic breadsticks. salad. chicken wings. or. none.  "; //getSidesList()-integarte with google sheet apis;
  
          var speechOutput = "You selected. "  + session.attributes.nonvegtop + "For non vegetarian toppings. " + repromptText;
 
     response.ask(speechOutput, repromptText);
 }
 
+function handleSidesMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var sides = intent.slots.SidesItem;
+	session.attributes.sides  = sides.value;
+
+       
+     var repromptText = "Is this a pickup or delivery order. "; //getCheeseList()-integarte with google sheet apis;
+
+         var speechOutput = "You selected " + session.attributes.sides +" in sides. " + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
 
 
 function handleMenuItemDialogRequest(intent, session , response){
