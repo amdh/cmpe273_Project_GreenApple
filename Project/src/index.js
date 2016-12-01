@@ -34,13 +34,13 @@
 
  */
 
-var APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
+var APP_ID = 'amzn1.ask.skill.58287cfb-48d0-49bb-ac3a-d5571e077c60';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
 
 
 
 var http = require('http'),
 
-    alexaDateUtil = require('./AlexaSpreadSheetUtil');
+    alexaSheetUtil = require('./AlexaSpreadSheetUtil');
 
 
 
@@ -136,6 +136,8 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
 
     "YesMenuIntent": function (intent, session, response) {
 
+        session.attributes.menuOrder = true;
+
         handleYesMenuIntentRequest(intent, session, response);
 
     },
@@ -169,8 +171,14 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
         handleNonVegToppingsMenuIntentRequest(intent, session, response);
 
     },
+    "SidesIntent": function (intent, session, response) {
+
+        handleSidesMenuIntentRequest(intent, session, response);
+
+    },
 
     "MenuItemIntent" :  function (intent , session, response){
+        
          handleMenuItemDialogRequest(intent, session, response);
     },
 
@@ -423,13 +431,27 @@ function handleNonVegToppingsMenuIntentRequest(intent, session , response){
 	session.attributes.nonvegtop  = nonvegtop.value;
 
        
-     var repromptText = "Your custom pizza is. "+ session.attributes.crust + "crust. and has following ingredients. " + session.attributes.sauce + "sauce. "+ session.attributes.cheese + "cheese. " +session.attributes.vegtop + "in vegetarian toppings. " + session.attributes.nonvegtop + "in non vegetarian toppings. " + "Is this a pickup or delivery order. "; //getNonVegToppingsList()-integarte with google sheet apis;
+     var repromptText = "Your custom pizza is. "+ session.attributes.crust + "crust. and has following ingredients. " + session.attributes.sauce + "sauce. "+ session.attributes.cheese + "cheese. " +session.attributes.vegtop + "in vegetarian toppings. " + session.attributes.nonvegtop + "in non vegetarian toppings. " + "Now please tell your choice of side. Garlic breadsticks. salad. chicken wings. or. none.  "; //getSidesList()-integarte with google sheet apis;
  
          var speechOutput = "You selected. "  + session.attributes.nonvegtop + "For non vegetarian toppings. " + repromptText;
 
     response.ask(speechOutput, repromptText);
 }
 
+function handleSidesMenuIntentRequest(intent, session , response){
+
+    
+
+ 	var sides = intent.slots.SidesItem;
+	session.attributes.sides  = sides.value;
+
+       
+     var repromptText = "Is this a pickup or delivery order. "; //getCheeseList()-integarte with google sheet apis;
+
+         var speechOutput = "You selected " + session.attributes.sides +" in sides. " + repromptText;
+
+    response.ask(speechOutput, repromptText);
+}
 
 
 function handleMenuItemDialogRequest(intent, session , response){
