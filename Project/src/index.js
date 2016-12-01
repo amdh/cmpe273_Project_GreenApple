@@ -333,7 +333,7 @@ function handleHelpRequest(response) {
 
     var speechOutput = " I can lead you through placing your pizza order at GreenApple PizzaCorner."
 
-        + " You can choose pizza from meny or build your custom pizza ."
+        + " You can choose pizza from menu or build your custom pizza ."
       
         + " Tell me your choice."
 
@@ -347,15 +347,17 @@ function handleHelpRequest(response) {
 
 function handleOrderPizzaIntentRequest(intent, session, response){
 
-var repromptText = " Do you want to know the menu card?";
+    var repromptText = " Lets proceed with your order, you want to choose pizza from menu or build your custom pizza? ";
 
-    var speechOutput = "I am ready to place your order. "
+                    //+ " What would you like to do?" ;
+
+    var speechOutput = "Welcome to GreenApple PizzaCorner. I am ready to place your order. "
 
         + repromptText;
 
 
 
-    response.ask(speechOutput, repromptText);
+    response.aks(speechOutput, repromptText);
 }
 
 function handleYesMenuIntentRequest(intent, session , response){
