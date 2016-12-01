@@ -40,7 +40,7 @@ var APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace wi
 
 var http = require('http'),
 
-    alexaSheetUtil = require('./AlexaSpreadSheetUtil');
+    alexaDateUtil = require('./AlexaSpreadSheetUtil');
 
 
 
@@ -136,14 +136,11 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
 
     "YesMenuIntent": function (intent, session, response) {
 
-        session.attributes.menuOrder = true;
-
         handleYesMenuIntentRequest(intent, session, response);
 
     },
 
     "MenuItemIntent" :  function (intent , session, response){
-        
          handleMenuItemDialogRequest(intent, session, response);
     },
 

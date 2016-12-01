@@ -19,6 +19,6 @@ future work:
 
 3> while giving values in slots 2 words are allowed?
 
-4? multipizza order?
+4> multipizza order?
 
 5>issue of switching between menu and custom order

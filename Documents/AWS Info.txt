@@ -4,3 +4,9 @@ AWS Information :
 Applciation ID: ID: amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac
 
 ARN : arn:aws:lambda:us-east-1:132838082170:function:GreenApple_PizzaCorner
+
+Google API Information :
+
+371802253643-n1cuia2a9ek1igo59qk9va21nnsciboj.apps.googleusercontent.com : clientid
+
+PrFWlHzPOJwzqlWcSzQb-9KS : client secret
