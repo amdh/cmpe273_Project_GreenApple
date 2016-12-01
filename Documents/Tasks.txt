@@ -8,7 +8,7 @@
 6> create skill with invocation name on amazon developer portal
 7>create lambda function
 8> Integration of google spread api in lambda function
-
+9> Testing end to end
 
 
 future work:

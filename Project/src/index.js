@@ -34,15 +34,15 @@
 
  */
 
-var APP_ID = 'amzn1.ask.skill.58287cfb-48d0-49bb-ac3a-d5571e077c60';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
+var APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
 
 
 
 var http = require('http'),
 
-<<<<<<< HEAD
+
 alexaSheetUtil = require('./AlexaSpreadSheetUtil');
-var GoogleSpreadsheet = require('google-spreadsheet');
+/*var GoogleSpreadsheet = require('google-spreadsheet');
 var async = require('async');
 
 // Update this line with your Google sheet ID
@@ -56,12 +56,8 @@ async.series([
     var creds = require('./creds.json');
     doc.useServiceAccountAuth(creds, step);
   }]);
-=======
-    alexaSheetUtil = require('./AlexaSpreadSheetUtil');
 
->>>>>>> 076955d94e3bfcbbc090b3939a8417f7b161847e
-
-
+*/
 /**
 
  * The AlexaSkill prototype and helper functions
@@ -152,47 +148,48 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
 
     },
 
-    "MenuIntent": function (intent, session, response) {
-
-<<<<<<< HEAD
-        handleMenuIntentRequest(intent, session, response);
-=======
-        session.attributes.menuOrder = true;
-
-        handleYesMenuIntentRequest(intent, session, response);
->>>>>>> 076955d94e3bfcbbc090b3939a8417f7b161847e
+    "YesMenuIntent": function (intent, session, response) {
+    
+       handleYesMenuIntentRequest(intent, session, response);       
 
     },
+
     "CustomMenuIntent": function (intent, session, response) {
 
         handleCustomMenuIntentRequest(intent, session, response);
 
     },
+
     "CrustIntent": function (intent, session, response) {
 
         handleCrustMenuIntentRequest(intent, session, response);
 
     },
+
     "SauceIntent": function (intent, session, response) {
 
         handleSauceMenuIntentRequest(intent, session, response);
 
     },
+
     "CheeseIntent": function (intent, session, response) {
 
         handleCheeseMenuIntentRequest(intent, session, response);
 
     },
+
     "VegToppingsIntent": function (intent, session, response) {
 
         handleVegToppingsMenuIntentRequest(intent, session, response);
 
     },
+
     "NonVegToppingsIntent": function (intent, session, response) {
 
         handleNonVegToppingsMenuIntentRequest(intent, session, response);
 
     },
+
     "SidesIntent": function (intent, session, response) {
 
         handleSidesMenuIntentRequest(intent, session, response);
@@ -313,6 +310,8 @@ function handleWelcomeRequest(response) {
         repromptOutput = {
 
             speech: "I can lead you through placing your pizza order at GreenApple PizzaCorner."
+
+            + " How can I proceed with your order, choose from menu or build custom pizza?"
             
             + menuPrompt,
 
@@ -332,11 +331,11 @@ function handleHelpRequest(response) {
 
     var repromptText = "Do you want to order from menu or build custom pizza?";
 
-    var speechOutput = "I can lead you through placing your pizza order at GreenApple PizzaCorner."
+    var speechOutput = " I can lead you through placing your pizza order at GreenApple PizzaCorner."
 
-        + "You can choose pizza from meny or build your custom pizza ."
+        + " You can choose pizza from meny or build your custom pizza ."
       
-        + "Tell me your choice."
+        + " Tell me your choice."
 
         + repromptText;
 
@@ -359,7 +358,7 @@ var repromptText = " Do you want to know the menu card?";
     response.ask(speechOutput, repromptText);
 }
 
-function handleMenuIntentRequest(intent, session , response){
+function handleYesMenuIntentRequest(intent, session , response){
 
     session.attributes.orderType = "menuorder";
 
@@ -450,33 +449,38 @@ function handleVegToppingsMenuIntentRequest(intent, session , response){
 }
 
 function handleNonVegToppingsMenuIntentRequest(intent, session , response){
-
     
 
  	var nonvegtop = intent.slots.NonVegToppingsItem;
+
 	session.attributes.nonvegtop  = nonvegtop.value;
 
-       
-     var repromptText = "Your custom pizza is. "+ session.attributes.crust + "crust. and has following ingredients. " + session.attributes.sauce + "sauce. "+ session.attributes.cheese + "cheese. " +session.attributes.vegtop + "in vegetarian toppings. " + session.attributes.nonvegtop + "in non vegetarian toppings. " + "Now please tell your choice of side. Garlic breadsticks. salad. chicken wings. or. none.  "; //getSidesList()-integarte with google sheet apis;
- 
-         var speechOutput = "You selected. "  + session.attributes.nonvegtop + "For non vegetarian toppings. " + repromptText;
+    var repromptText = "Which size do you want ?";
+
+      
+     var speechOutput = "Your custom pizza is. "+ session.attributes.crust 
+     
+     + "crust. and has following ingredients. " + session.attributes.sauce 
+     
+     + "sauce. "+ session.attributes.cheese + "cheese. " 
+     
+     +session.attributes.vegtop + "in vegetarian toppings. " 
+     
+     + session.attributes.nonvegtop + "in non vegetarian toppings. " 
+     
+     + repromptText;
 
     response.ask(speechOutput, repromptText);
 }
 
 function handleSidesMenuIntentRequest(intent, session , response){
 
-    
+	var sides = intent.slots.SidesItem;
 
- 	var sides = intent.slots.SidesItem;
 	session.attributes.sides  = sides.value;
 
-       
-     var repromptText = "Is this a pickup or delivery order. "; //getCheeseList()-integarte with google sheet apis;
-
-         var speechOutput = "You selected " + session.attributes.sides +" in sides. " + repromptText;
-
-    response.ask(speechOutput, repromptText);
+    getDispatchOrderRequest(intent, session, response);
+   
 }
 
 
@@ -553,10 +557,15 @@ function handleSizeDialogRequest(intent, session , response){
 
     }
 
+        repromptText = "Choose the one. ";
+        
+        speechOutput = "Now please tell your choice of side. Garlic breadsticks. salad. chicken wings or none.  ";
 
         session.attributes.size = size.displaySize;
 
-        getDispatchOrderRequest(intent, session, response);
+        response.ask(speechOutput, repromptText);
+
+       // getDispatchOrderRequest(intent, session, response);
        
 
     
@@ -578,32 +587,27 @@ function handleSizeDialogRequest(intent, session , response){
 
 function handleNoSlotDialogRequest(intent, session, response) {
 
-    
-
         var repromptText = "Please try again telling pizza name from the menu, for example , Pepperoni pizza. ";
 
         var speechOutput = "Sorry, I could not get your choice." + repromptText;
 
-
-
         response.ask(speechOutput, repromptText);
-
-   
 
 }
 
 // ask for pickup or delivery
 function getDispatchOrderRequest(intent, session, response){
 
-    var repromptText = "Is this a pickup or delivery order?";
+    var repromptText = "So is this a pickup or delivery order?";
 
-    var speechOutput = " Okay. " 
+    var speechOutput =  "You selected " + session.attributes.sides +" in sides. " 
 
-    + repromptText;
+                        + repromptText;
 
     response.ask(speechOutput, repromptText);
 
 }
+
 
 function handleDispatchOrderIntentRequest(intent , session , response){
 
@@ -616,33 +620,25 @@ function handleDispatchOrderIntentRequest(intent , session , response){
 
             session.attributes.dispatchOption = dispatchOption.value;
 
-            if(session.attributes.orderType == "menuorder"){
                 var repromptText = "May I know your location?";
 
-                var speechOutput = " You selected " + session.attributes.menuItem 
-                
-                + " with " + session.attributes.size + "size.  "
+                var speechOutput = "Okay.  "
                 
                 + repromptText;
 
-                response.ask(speechOutput, repromptText);
-            }
+                response.ask(speechOutput, repromptText);       
 
-            if(session.attributes.orderType == "customorder"){
-
-
-            }
-
+            
         }
     }
         
             session.attributes.dispatchOption = "pickup";
             // default is pickup
             getCustomerInfo(intent , session , response);
-         
 
     
 }
+
 
 //handles tasks after address is given by the user
 function handleAddressIntentRequest(intent , session , response){
@@ -707,18 +703,12 @@ function handleCustomerInfoIntentRequest( intent , session , response){
      var custName = intent.slots.CustomerName;
 
      session.attributes.customerInfo = custName.value
-     
-      if( session.attributes.menuItem && session.attributes.size && session.attributes.dispatchOption ){
-        //var speechOutput = " Hey " + session.attributes.customerInfo + ","
-        //                +" Your order has been placed."
-     
-        //response.tell(speechOutput);
-
-        getFinalOrderResponse(session, response);
-        
-    }else{
-        
-        var speechOutput = " Hey " + session.attributes.customerInfo + ","
+       
+       if(session.attributes.orderType == "menuorder"){
+           if( session.attributes.menuItem && session.attributes.size && session.attributes.sides && session.attributes.dispatchOption ){
+               getFinalOrderResponse(session, response);
+           }else{
+                        var speechOutput = " Hey " + session.attributes.customerInfo + ","
                 
                         //+ " You placed : "
                         
@@ -726,22 +716,81 @@ function handleCustomerInfoIntentRequest( intent , session , response){
                         
                         +" Your order seems to be incomplete."
      
-        response.tell(speechOutput);
-        
-    }
+                        response.tell(speechOutput);
+
+           }
+       }else{
+            if(session.attributes.crust && session.attributes.sauce  && session.attributes.cheese &&
+                    session.attributes.vegtop && session.attributes.nonvegtop && session.attributes.size &&
+                     session.attributes.sides && session.attributes.dispatchOption){
+
+                             getFinalCustomOrderResponse(session,response);
+            }               
+            else{
+                        var speechOutput = " Hey " + session.attributes.customerInfo + ","
+                
+                        //+ " You placed : "
+                        
+                        //+session.attributes.menuItem + session.attributes.size + session.attributes.dispatchOption
+                        
+                        +" Your order seems to be incomplete."
      
-    
-    
+                       esponse.tell(speechOutput);
+            }
+       
+        }
    
 }
 
+// custom order response
+function getFinalCustomOrderResponse(session , respond){
 
+    var orderResult = placeCustomOrderRequest(session.attributes.crust, session.attributes.sauce,session.attributes.cheese,
+                    session.attributes.vegtop , session.attributes.nonvegtop , session.attributes.size ,
+                     session.attributes.sides, session.attributes.dispatchOption, session.attributes.customerInfo);
+
+    var speechOutput;
+    
+    if (orderResult.err) {
+
+            speechOutput = "Sorry, the GreenApple PizzaCorner service is experiencing a problem. Please try again later";
+
+        } else {
+            
+            speechOutput = " Your custom pizza is: "+ session.attributes.crust 
+     
+            + " crust. and has following ingredients. " + session.attributes.sauce 
+            
+            + " sauce. "+ session.attributes.cheese + "cheese. " 
+            
+            + session.attributes.vegtop + "in vegetarian toppings. " 
+            
+            + session.attributes.nonvegtop + "in non vegetarian toppings "
+            
+            + " Its of " + session.attributes.size + " size.  " 
+
+            + " And you also ordered " +session.attributes.sides +" sides. "
+
+            + " You chose " + session.attributes.dispatchOption +" option. "
+
+            + " Your total bill amount is " + orderResult.price + ". "
+
+            + " Your order will be ready in twenty minutes. "  
+
+            + " Thank you for choosing GreenApple PizzaCorner. Have a nice day. ";
+
+        }
+
+
+      response.tell(speechOutput);
+}
 
     // place the order and return comeplete response
 function getFinalOrderResponse(session , response) {
 
 
-    var orderResult = placeOrderRequest(session.attributes.menuItem, session.attributes.size, session.attributes.dispatchOption ,session.attributes.customerInfo);
+    var orderResult = placeOrderRequest(session.attributes.menuItem, session.attributes.size,session.attributes.sides,
+                     session.attributes.dispatchOption ,session.attributes.customerInfo);
     
     
         var speechOutput;
@@ -764,6 +813,8 @@ function getFinalOrderResponse(session , response) {
 
                 + " You chose " + session.attributes.dispatchOption +" option. "
 
+                + " Also, you chose " + session.attributes.sides + " in sides. "
+
                 + " Your total bill amount is " + orderResult.price + ". "
 
                 + " Your order will be ready in ten minutes. "  
@@ -782,13 +833,27 @@ function getFinalOrderResponse(session , response) {
 
 
 //place order request by storing the order in spreadsheet, and respond to the user
-function placeOrderRequest(menuItem, size, dispatchOption , customerName ){
+function placeOrderRequest(menuItem, size, sides, dispatchOption , customerName ){
 
     // place the order in spreadsheet and get the price
   
     return {
     
             price: "ten dollars" //alexaDateUtil.getFormattedTime(new Date(firstHighTide.t))
+    }
+
+
+}
+
+//place order request by storing the order in spreadsheet, and respond to the user
+function placeCustomOrderRequest(crust, sauce, cheese , vegTop , nonvegTop,  
+                                size, sides, dispatchOption , customerName ){
+
+    // place the order in spreadsheet and get the price
+  
+    return {
+    
+            price: "twenty five dollars" //alexaDateUtil.getFormattedTime(new Date(firstHighTide.t))
     }
 
 
@@ -985,6 +1050,7 @@ function getSupportedLocationsText(){
 
 }
 
+/*
 function auth_sheet(){
 
 var sheet;
@@ -1030,6 +1096,7 @@ async.series([
   }]);
 
 }
+*/
 
 // Create the handler that responds to the Alexa Request.
 
