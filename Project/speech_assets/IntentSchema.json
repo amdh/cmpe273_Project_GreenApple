@@ -40,6 +40,12 @@
                     "type": "LIST_OF_NONVEG_TOPPINGS"
                 }]
         },{
+            "intent": "SidesIntent",
+            "slots": [ {
+                    "name": "SidesItem",
+                    "type": "LIST_OF_SIDES"
+                }]
+        },{
             "intent": "MenuItemIntent",
             "slots": [   
                {
