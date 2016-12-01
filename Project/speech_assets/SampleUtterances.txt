@@ -64,6 +64,68 @@ CustomerInfoIntent  Yes its {CustomerName}
 CustomerInfoIntent  Sure its {CustomerName}
 CustomerInfoIntent  Yeah its {CustomerName}
 
+
+CustomMenuIntent Custom Pizza
+CustomMenuIntent Custom 
+CustomMenuIntent I want to make a custom pizza
+CustomMenuIntent I want a custom pizza
+CustomMenuIntent Make a custom pizza
+CustomMenuIntent Build a custom pizza
+CustomMenuIntent Make custom pizza
+CustomMenuIntent Build custom pizza
+
+
+CrustIntent	 I want {CrustItem} Crust
+CrustIntent	 {CrustItem} Crust
+
+SauceIntent I want {SauceItem} Sauce
+SauceIntent {SauceItem} Sauce
+
+CheeseIntent I want {CheeseItem} Cheese
+CheeseIntent {CheeseItem} Cheese
+
+VegToppingsIntent I want {VegToppingsItem} 
+VegToppingsIntent I want {VegToppingsItem} in veg toppings
+VegToppingsIntent I want {VegToppingsItem} in vegetarian toppings
+VegToppingsIntent I want {VegToppingsItem} for veg toppings
+VegToppingsIntent I want {VegToppingsItem} for vegetarian toppings
+VegToppingsIntent For veg toppings I want {VegToppingsItem}
+VegToppingsIntent For vegetarian toppings I want {VegToppingsItem}
+
+VegToppingsIntent I want {VegToppingsItem} and {VegToppingsItem} 
+VegToppingsIntent I want {VegToppingsItem} {VegToppingsItem}  in veg toppings
+VegToppingsIntent I want {VegToppingsItem} and {VegToppingsItem}  in veg toppings
+VegToppingsIntent I want {VegToppingsItem}  and {VegToppingsItem} in vegetarian toppings
+VegToppingsIntent I want {VegToppingsItem} and {VegToppingsItem} for veg toppings
+VegToppingsIntent I want {VegToppingsItem} and {VegToppingsItem} for vegetarian toppings
+VegToppingsIntent For veg toppings I want {VegToppingsItem} and {VegToppingsItem}
+VegToppingsIntent For vegetarian toppings I want {VegToppingsItem} and {VegToppingsItem} 
+
+NonVegToppingsIntent I want {NonVegToppingsItem} 
+NonVegToppingsIntent I want {NonVegToppingsItem} in non veg toppings
+NonVegToppingsIntent I want {NonVegToppingsItem} in non vegetarian toppings
+NonVegToppingsIntent I want {NonVegToppingsItem} for non veg toppings
+NonVegToppingsIntent I want {NonVegToppingsItem} for non vegetarian toppings
+NonVegToppingsIntent For non veg toppings I want {NonVegToppingsItem}
+NonVegToppingsIntent For non vegetarian toppings I want {NonVegToppingsItem}
+
+NonVegToppingsIntent I want {NonVegToppingsItem} and {NonVegToppingsItem} 
+NonVegToppingsIntent I want {NonVegToppingsItem} {NonVegToppingsItem}  in non veg toppings
+NonVegToppingsIntent I want {NonVegToppingsItem} and {NonVegToppingsItem}  in non veg toppings
+NonVegToppingsIntent I want {NonVegToppingsItem}  and {NonVegToppingsItem} in non vegetarian toppings
+NonVegToppingsIntent I want {NonVegToppingsItem} and {NonVegToppingsItem} for non veg toppings
+NonVegToppingsIntent I want {NonVegToppingsItem} and {NonVegToppingsItem} for non vegetarian toppings
+NonVegToppingsIntent For non veg toppings I want {NonVegToppingsItem} and {NonVegToppingsItem}
+NonVegToppingsIntent For non vegetarian toppings I want {NonVegToppingsItem} and {NonVegToppingsItem} 
+
+SidesIntent I want {SidesItem} 
+SidesIntent I want {SidesItem} in sides
+SidesIntent I want {SidesItem} in sides
+SidesIntent I want {SidesItem} for sides
+SidesIntent I want {SidesItem} for sides
+SidesIntent For sides I want {SidesItem}
+SidesIntent For sides I want {SidesItem}
+
 AMAZON.HelpIntent	Help 
 AMAZON.HelpIntent	Help understanding GreenApple PizzaCorner
 AMAZON.HelpIntent	I need Help
