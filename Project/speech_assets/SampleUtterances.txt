@@ -12,15 +12,15 @@ OrderPizzaIntent  Open GreenApple PizzaCorner
 OrderPizzaIntent  Start GreenApple PizzaCorner
 
 
-YesMenuIntent  I would like to order from Menu
-YesMenuIntent  What's in the Menu
-YesMenuIntent  What is the Menu
-YesMenuIntent  Can you tell me the Menu
-YesMenuIntent  Tell me the Menu
-YesMenuIntent  Please tell me the Menu
-YesMenuIntent  Choose from Menu
-YesMenuIntent  Yes
-YesMenuIntent  Yes I want to know the menu
+MenuIntent  I would like to order from Menu
+MenuIntent  What's in the Menu
+MenuIntent  What is the Menu
+MenuIntent  Can you tell me the Menu
+MenuIntent  Tell me the Menu
+MenuIntent  Please tell me the Menu
+MenuIntent  Choose from Menu
+MenuIntent  Yes
+MenuIntent  Yes I want to know the menu
 
 
 

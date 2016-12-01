@@ -40,8 +40,21 @@ var APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace wi
 
 var http = require('http'),
 
-    alexaDateUtil = require('./AlexaSpreadSheetUtil');
+alexaSheetUtil = require('./AlexaSpreadSheetUtil');
+var GoogleSpreadsheet = require('google-spreadsheet');
+var async = require('async');
 
+// Update this line with your Google sheet ID
+var doc = new GoogleSpreadsheet('1axeSHnFyNADHaJxdsG39BAPEa36jdNY01AONaUp8LRU');
+var creds = require('./creds.json');
+var sheet;
+ 
+async.series([
+  function setAuth(step) {
+    // see notes below for authentication instructions! 
+    var creds = require('./creds.json');
+    doc.useServiceAccountAuth(creds, step);
+  }]);
 
 
 /**
@@ -134,9 +147,9 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
 
     },
 
-    "YesMenuIntent": function (intent, session, response) {
+    "MenuIntent": function (intent, session, response) {
 
-        handleYesMenuIntentRequest(intent, session, response);
+        handleMenuIntentRequest(intent, session, response);
 
     },
     "CustomMenuIntent": function (intent, session, response) {
@@ -290,7 +303,7 @@ function handleWelcomeRequest(response) {
 
         };
 
-
+    auth_sheet();
 
     response.ask(speechOutput, repromptOutput);
 
@@ -329,7 +342,9 @@ var repromptText = " Do you want to know the menu card?";
     response.ask(speechOutput, repromptText);
 }
 
-function handleYesMenuIntentRequest(intent, session , response){
+function handleMenuIntentRequest(intent, session , response){
+
+    session.attributes.orderType = "menuorder";
 
     var repromptText = "Which pizza you would like to order? ";
 
@@ -343,6 +358,8 @@ function handleYesMenuIntentRequest(intent, session , response){
     response.ask(speechOutput, repromptText);
 }
 function handleCustomMenuIntentRequest(intent, session , response){
+
+    session.attributes.orderType = "customorder";
 
     var repromptText = "Please tell your choice of crust. Normal. Thin. Or Brooklyn"; //getCrustList()-integarte with google sheet apis;
 
@@ -491,7 +508,7 @@ function handleSizeDialogRequest(intent, session , response){
 
     if (!size) {
 
-        repromptText = "Please choose from regular, medium or large "
+        repromptText = "Please choose from small , medium , large or extralarge "
 
             + "Which size do you want?";
 
@@ -549,10 +566,8 @@ function getDispatchOrderRequest(intent, session, response){
 
     var repromptText = "Is this a pickup or delivery order?";
 
-    var speechOutput = " You selected " + session.attributes.menuItem 
-    
-    + " with " + session.attributes.size + "size. " 
-    
+    var speechOutput = " Okay. " 
+
     + repromptText;
 
     response.ask(speechOutput, repromptText);
@@ -570,15 +585,22 @@ function handleDispatchOrderIntentRequest(intent , session , response){
 
             session.attributes.dispatchOption = dispatchOption.value;
 
-             var repromptText = "May I know your location?";
+            if(session.attributes.orderType == "menuorder"){
+                var repromptText = "May I know your location?";
 
-            var speechOutput = " You selected " + session.attributes.menuItem 
-            
-            + " with " + session.attributes.size + "size.  "
-            
-            + repromptText;
+                var speechOutput = " You selected " + session.attributes.menuItem 
+                
+                + " with " + session.attributes.size + "size.  "
+                
+                + repromptText;
 
-            response.ask(speechOutput, repromptText);
+                response.ask(speechOutput, repromptText);
+            }
+
+            if(session.attributes.orderType == "customorder"){
+
+
+            }
 
         }
     }
@@ -929,6 +951,52 @@ function getSupportedLocationsText(){
     }
 
     return locText;
+
+}
+
+function auth_sheet(){
+
+var sheet;
+ 
+async.series([
+  function setAuth(step) {
+    // see notes below for authentication instructions! 
+    var creds = require('./creds.json');
+    doc.useServiceAccountAuth(creds, step);
+  },
+
+
+  function getInfoAndWorksheets(step) {
+    doc.getInfo(function(err, info) {
+
+      console.log('Loaded doc: '+info.title+' by '+info.author.email);
+      sheet = info.worksheets[0];
+      console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+      step();
+    });
+  },
+
+
+//read the first 
+  function workingWithRows(step) {
+    // google provides some query options 
+    sheet.getRows({
+      offset: 1,
+      limit: 20,
+      orderby: 'col2'
+    }, function( err, rows ){
+      console.log('Read '+rows.length+' rows');
+ 
+      // the row is an object with keys set by the column headers 
+      rows[0].colname = 'new val';
+      rows[0].save(); // this is async 
+ 
+      // deleting a row 
+      rows[0].del();  // this is async 
+ 
+      step();
+    });
+  }]);
 
 }
 
