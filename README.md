@@ -14,6 +14,7 @@ The input is in form of voice instructions from the user. And also involves resp
 
 
 Google Spread Sheet API has been used for :
+
 Storing and retrieving the pizza shop menu details like the pizza type available, size and price of the chosen pizza 
 Storing and retrieving details if customer wants to order a custom pizza
 To save customer orders and their details like name, contact number and address in case of delivery. 
