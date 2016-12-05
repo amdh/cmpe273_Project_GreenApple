@@ -3,7 +3,7 @@ project for semester1
 
 #Project Topic : Amazon Echo-enabled Pizza Ordering System
 
-#Team:GreenApple
+#Project Description
  Amazon Echo-enabled Pizza Ordering System
 The project takes input from ( https://echosim.io/ )
 
@@ -23,7 +23,7 @@ To store order type: pickup or delivery
 
 AWS Lambda Function has been written to map the utterances(what user will speak while ordering) with intents (to process utterances our service can accept)
  
-
+#Team:GreenApple
 Chaya Malik
 Amruta Dhondage
 Shafi Dayatar
