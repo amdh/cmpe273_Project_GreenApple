@@ -12,6 +12,12 @@ Steps to set up Google Sheet API:
 
 5. run the file using “node readGoogleSheet.js” to read the menu
 
+OR for writing into spreadsheet, execute “node writeGoogleSheet.js”
+
+
+NOTE: writeGoogleSheet.js required stronger authentication so if you first ran it, no need to re-adjust your authentication rights for executing readGoogleSheet.js.
+Otherwise, simply run “rm  ~/.credentials/sheets.googleapis.com-nodejs-quickstart.json” and then, go to the below steps.
+
 
 ——————
 
