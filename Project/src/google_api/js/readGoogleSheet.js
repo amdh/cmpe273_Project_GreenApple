@@ -103,8 +103,8 @@ function listMajors(auth) {
   var sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
     auth: auth,
-    spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-    range: 'Class Data!A2:E',
+    spreadsheetId: '1BiyuW59YQzAVPaZI8f8qsBQfdkQjF0r3PdbO4eMX1z8',
+    range: 'Menu!A2:C',
   }, function(err, response) {
     if (err) {
       console.log('The API returned an error: ' + err);
@@ -114,11 +114,11 @@ function listMajors(auth) {
     if (rows.length == 0) {
       console.log('No data found.');
     } else {
-      console.log('Name, Major:');
+      console.log('Pizza, Price:');
       for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
-        // Print columns A and E, which correspond to indices 0 and 4.
-        console.log('%s, %s', row[0], row[4]);
+        // Print columns A (pizza name) and C (price), which correspond to indices 0 and 2.
+        console.log('%s, %s', row[0], row[2]);
       }
     }
   });

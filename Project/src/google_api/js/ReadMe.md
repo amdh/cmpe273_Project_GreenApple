@@ -10,4 +10,4 @@ Steps to set up Google Sheet API:
 
 4. Add a js file to read sheets using google sheets ID
 
-5. run the file using “node readGoogleSheet.js”
+5. run the file using “node readGoogleSheet.js” to read the menu
