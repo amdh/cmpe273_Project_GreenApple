@@ -340,7 +340,7 @@ function handleHelpRequest(response) {
 
     var speechOutput = " I can lead you through placing your pizza order at GreenApple PizzaCorner."
 
-        + " You can choose pizza from meny or build your custom pizza ."
+        + " You can choose pizza from menu or build your custom pizza ."
       
         + " Tell me your choice."
 
