@@ -25,3 +25,10 @@ Required steps after step 5:
 a. Execute the Link provided in the console into browser. 
 b. Copy the generated code on the browser 
 c. Paste it to the CMD and press enter
+
+
+Menu:
+https://docs.google.com/spreadsheets/d/1BiyuW59YQzAVPaZI8f8qsBQfdkQjF0r3PdbO4eMX1z8/edit#gid=0
+
+Order:
+https://docs.google.com/spreadsheets/d/1cIT23BGdY5wrigYpK_a83n_VLcbaUeOsDfqLrxbYbjk/edit#gid=0
