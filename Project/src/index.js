@@ -202,6 +202,11 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
         handleSidesMenuIntentRequest(intent, session, response);
 
     },
+    "OrderStatusIntent": function (intent, session, response) {
+
+        handleOrderStatusIntentRequest(intent, session, response);
+
+    },
 
     "MenuItemIntent" :  function (intent , session, response){
         
@@ -487,6 +492,18 @@ function handleSidesMenuIntentRequest(intent, session , response){
 	session.attributes.sides  = sides.value;
 
     getDispatchOrderRequest(intent, session, response);
+   
+}
+
+function handleOrderStatusIntentRequest(intent, session , response){
+
+    var repromptText = "Can you please tell me your order number";
+
+    var speechOutput =  "I will check your order status" 
+
+                        + repromptText;
+
+    response.ask(speechOutput, repromptText);
    
 }
 
