@@ -42,6 +42,13 @@ var http = require('http'),
 
 
 alexaSheetUtil = require('./AlexaSpreadSheetUtil');
+var GoogleSpreadsheet = require('google-spreadsheet');
+var async = require('async');
+
+// Update this line with your Google sheet ID
+var doc = new GoogleSpreadsheet('1axeSHnFyNADHaJxdsG39BAPEa36jdNY01AONaUp8LRU');
+var creds = require('./creds.json');
+var sheet;
 /*var GoogleSpreadsheet = require('google-spreadsheet');
 var async = require('async');
 
@@ -836,7 +843,46 @@ function getFinalOrderResponse(session , response) {
 function placeOrderRequest(menuItem, size, sides, dispatchOption , customerName ){
 
     // place the order in spreadsheet and get the price
-  
+  async.series([
+            function setAuth(step) {
+              doc.useServiceAccountAuth(creds, step);
+            },
+
+            function getInfoAndWorksheets(step) {
+                doc.getInfo(function(err, info) {
+
+                console.log('Loaded doc: '+info.title+' by '+info.author.email);
+                sheet = info.worksheets[1];
+                console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+                step();
+                });
+            },
+
+            function addRow(step) {
+              var d = new Date();
+              var date_formatted = 
+                [d.getDate(),
+                 d.getMonth()+1,
+                 d.getFullYear()].join('/')+', '+
+                [d.getHours(),
+                 d.getMinutes()].join(':');
+               
+              var new_row = {
+                timestamp: date_formatted,                
+                customerInfo : customerName,
+                order : size + " size " + menuItem + " pizza " + " with " + sides,
+                dispatchOption : dispatchOption,
+                price : $20
+              }
+              doc.addRow(1, new_row, step)
+            },
+            
+            function(err){
+              return {
+                  err : true
+              }
+            }
+          ]);
     return {
     
             price: "ten dollars" //alexaDateUtil.getFormattedTime(new Date(firstHighTide.t))

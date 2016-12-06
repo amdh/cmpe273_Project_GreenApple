@@ -2,11 +2,15 @@
   "name": "greenapple",
   "version": "0.0.1",
   "description": "A Node.js web application that Alexa Skill set.",
-  "main": "index.handler",
+  "main": "index.js",
   "scripts": {
-    "start": "index.handler"
+    "start": "index.js"
   },
+ 
   "dependencies": {
+    "alexa-skill": "^0.1.1",
+    "async": "^2.0.0-rc.6",
+    "google-spreadsheet": "^2.0.3",
     "google-auth-library": "^0.9.10",
     "googleapis": "^14.2.0"
   },
