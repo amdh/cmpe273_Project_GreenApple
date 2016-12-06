@@ -85,6 +85,9 @@
                     "type": "LIST_OF_CUSTOMER_NAME"
                 }              
             ]
+        },,{
+            "intent": "OrderStatusIntent",
+            "slots": []
         },{
             "intent": "AMAZON.StopIntent",
             "slots": []

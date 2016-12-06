@@ -128,6 +128,14 @@ SidesIntent I want {SidesItem} for sides
 SidesIntent For sides I want {SidesItem}
 SidesIntent For sides I want {SidesItem}
 
+OrderStatusIntent I want to know the status of my order
+OrderStatusIntent When will my order be ready
+OrderStatusIntent What is the status
+OrderStatusIntent What is the status of my order
+OrderStatusIntent Is my order ready
+OrderStatusIntent Is the order ready
+OrderStatusIntent How much time for my order to get ready
+
 AMAZON.HelpIntent	Help 
 AMAZON.HelpIntent	Help understanding GreenApple PizzaCorner
 AMAZON.HelpIntent	I need Help
