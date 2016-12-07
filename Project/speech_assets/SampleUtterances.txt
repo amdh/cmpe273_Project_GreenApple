@@ -136,6 +136,9 @@ OrderStatusIntent Is my order ready
 OrderStatusIntent Is the order ready
 OrderStatusIntent How much time for my order to get ready
 
+OrderNumberIntent {My order number is |order}
+OrderNumberIntent {This is my order number|order}
+
 AMAZON.HelpIntent	Help 
 AMAZON.HelpIntent	Help understanding GreenApple PizzaCorner
 AMAZON.HelpIntent	I need Help

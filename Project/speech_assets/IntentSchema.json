@@ -89,6 +89,12 @@
             "intent": "OrderStatusIntent",
             "slots": []
         },{
+            "intent": "OrderNumberIntent",
+            "slots": [{
+            	"name": "order",
+          		"type": "NUMBER"
+        }]
+        },{
             "intent": "AMAZON.StopIntent",
             "slots": []
         },{

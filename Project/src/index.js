@@ -207,6 +207,11 @@ GreenApplePizzaSkill.prototype.intentHandlers = {
         handleOrderStatusIntentRequest(intent, session, response);
 
     },
+    "OrderNumberIntent": function (intent, session, response) {
+
+        handleOrderNumberIntentRequest(intent, session, response);
+
+    },
 
     "MenuItemIntent" :  function (intent , session, response){
         
@@ -497,9 +502,9 @@ function handleSidesMenuIntentRequest(intent, session , response){
 
 function handleOrderStatusIntentRequest(intent, session , response){
 
-    var repromptText = "Can you please tell me your order number";
+    var repromptText = "Can you please tell me your order number. ";
 
-    var speechOutput =  "I will check your order status" 
+    var speechOutput =  "I will check your order status. " 
 
                         + repromptText;
 
@@ -507,6 +512,59 @@ function handleOrderStatusIntentRequest(intent, session , response){
    
 }
 
+/*
+function handleOrderNumberIntentRequest(intent, session , response){
+
+    var orderNumber = intent.slots.orderNumber;
+
+    /logic to check for order number in google spreadshhet comes here
+    
+    var isOrder = false;//assign this var true or false depending on whether the order number is there in google sheet or not
+    
+    if(isOrder == false)//order number not there in sheet
+	{
+		var repromptText = "Please check your order number and ask us again";
+
+    		var speechOutput =  "Sorry there is no order with this number. " 
+
+                        + repromptText;
+
+    		response.ask(speechOutput, repromptText);	
+        }	
+   else//order number is there in sheet
+	{
+		//var ts = read timestamp from sheet for order number
+	        //var cs = read current time
+		if (cs-ts > 10)
+ 		{
+			if (session.attributes.dispatchOption == "delivery")
+			{
+				var repromptText = "It will be delivered shortly. ";
+
+    				var speechOutput =  "Your order is ready. " + repromptText;
+
+    				response.ask(speechOutput, repromptText);	
+        		}
+			else if (session.attributes.dispatchOption == "pickup")
+			{
+				var repromptText = "";
+
+    				var speechOutput =  "Your order is ready for pickup. " + repromptText;
+
+    				response.ask(speechOutput, repromptText);	
+        		}
+   		}
+		else if(cs-ts < 10)
+		{
+			var repromptText = "It will be delivered shortly. ";
+
+    			var speechOutput =  "Your order will be ready in. " + cs-ts + "minutes. " + repromptText;
+
+    				response.ask(speechOutput, repromptText);
+		}
+	}
+}
+*/
 
 function handleMenuItemDialogRequest(intent, session , response){
     //check if menuitem is present in the menu list
@@ -635,9 +693,7 @@ function getDispatchOrderRequest(intent, session, response){
 
 function handleDispatchOrderIntentRequest(intent , session , response){
 
-    var dispatchOption = intent.slots.DispatchOption;
-
-
+    var dispatchOption = intent.slots.Dispatch
     if(dispatchOption && dispatchOption.value){
 
         if( dispatchOption.value == "delivery"){
