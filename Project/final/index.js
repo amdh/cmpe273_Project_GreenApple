@@ -330,18 +330,15 @@ function handleOrderPizzaIntentRequest(intent, session, response){
 
 function handleYesMenuIntentRequest(intent, session , response){
 
-    session.attributes.orderType = "menuorder";
+       session.attributes.orderType = "menuorder";
+        var repromptText = "Which pizza you would like to order? ";
+        var speechOutput = " I have these pizzas for you in my menu card. "
 
-    var repromptText = "Which pizza you would like to order? ";
-
-    var speechOutput = " I have these pizzas for you in my menu card. "
-            
-            + " Super Veggie  , Pepperoni  , Barbeque chicken  ,Margherita. " // getMenuListTextFromUtil() //should return text
-
-             + repromptText;
-
-
-    response.ask(speechOutput, repromptText);
+        var pizza_name = ""
+        menuResponse(speechOutput, function(err, output){
+            speechOutput +=  output + repromptText;
+            response.ask(speechOutput, repromptText);
+        });
 }
 function handleCustomMenuIntentRequest(intent, session , response){
 
