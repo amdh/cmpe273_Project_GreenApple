@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "api-project-465880546814",
+  "private_key_id": "adb56718306e9e4085207dec994b37924bb8b535",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDmjUCCYi/D2OKN\nGXys5csX06Uc9kiYI6jd5iR7eSfXHFvJdT8VIR/LxV8Y/IUye3wmpJJjdoyhHyON\n1EEWwwLp4moAYVyMD9JodYBVKSgtB46GdQMixK432wy2qXMYzrdrXwOWN2cM0MfB\nvwNeWpHBM42h33uamqV5FkkmdStTPOfG265rrKJTI7Sq8vQRXtsquTdhSXd05p77\nTPz4XBRPfb6bSZvUlPH16tUpu4376NPGdCHl9BNLUlvQNH4SbcLzOCUGhxi8r14e\n7Wj+7n62wGc1oefFk/fbKu/alxlQd+HAMN6QTZsUXfHkffD3kxTL9liirpkOvNgK\nz69UuJIpAgMBAAECggEBALyP8J/y8EANBhYDL241r6q4JkYOxIbyO23pihMWn1gX\nUJbvdv2wDtJZhhLojYQhbQQp+7SvxAsPbcPVQrr8GkjyLmJLPycq1Zsr5x8/vyU9\nFfuwfjUUia0TUk2fP4ydnXSKzGMywuy/YXF76aRlDOroYEFxiCWFsCrd6Ew07o9v\nJgEDj2GnTfa+Ry1TWQBwhFMZnGcMPUNwN6prqJlE2klFC9uRRswhF9lVvkkSRj5s\nWcorrJ7FkPwCiU+Xa84A4fB3Q5nIf23USVHdpn9sIN0xehf67PBjYGwIZL5vIHYo\nqEwYtoVCwK3HLD/emp6QZlTSb/GYRb5qOB+RPl/ghIUCgYEA/vggUSUH19xKcURa\nTvChXDswhnkIIAFVkTZhg0rHHcQtEoGp8b6T/f6RCRkgLIwFrAqhgVbGMmSewg9u\nIWuZQPqgfa1O4goKcHNxsFr91zy+2Vywqp5FZaGTTxvArkcohGaF2fukWlFF2GOp\nFcaheN5jA1h0TVxlt3EdhC4oMRsCgYEA53vbA2KgwwD9S0YH4coNg7uOhSpLjSBB\nirxcELrbapnlDuJzSd7yOBM8NOeGkK7YzfX/U7mkWpixMlxkviSL2G9FYHBF5CW5\nXAsOe24xQOBZmU2Nxg6UdHkegQsBnihaiJppb24gd775H0XB6ElIR7wwDNeaGerl\n9OyyZK/YwgsCgYEA0+fc1BP2xMztgd3RQLJ1KXZ4CgslWZRCTYHo4XmQq4iT/UGO\nwMAnt32PhQRA3UUyoZ3kRN6dstw1pgu0+Em5AWxLXqhfWzYFHxiTcILvXae65mRG\n4EbSXnk/OQxTw4SYhBHBRT4Dhpztc77AlLyVDyOlHu6xGmqkjyWP5n+GH+kCgYBd\naebtC80SRIDy8nTV0iL4CSUvae0JK34njXGdsro+35HHGu0pX1Xh+SkvtErichy9\nqMr7r4u6n6nKR+zDqp3gnq6hh009D1go47FZcBNiOecObXSL+3A/PG1p59YkS+aU\n/7MSq59gk2mXDCB/K6uGf1PoqszeLqPT3fzzkt7nFwKBgEnGea+Px31Kz/2HGi/t\n8sPwQpinpfskb2i8XRIn5gn5yVNOaBgaGX+OM5Q27lHqjzkvO7TRAs0qdS5dN0fb\nshikw1QlBmhjvmLOYGggw5pp6QQN7mTHyL/VWpjLByIVLK+PI2VaBAWuQIvFLSoS\nkTgEe1J2UsOa9fM0byHZNORy\n-----END PRIVATE KEY-----\n",
+  "client_email": "alexa-green-apple@api-project-465880546814.iam.gserviceaccount.com",
+  "client_id": "110550197949123132124",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/alexa-green-apple%40api-project-465880546814.iam.gserviceaccount.com"
+}

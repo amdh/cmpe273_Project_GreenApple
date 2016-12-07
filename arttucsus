@@ -1,0 +1,203 @@
+[1mdiff --git a/Project/speech_assets/SampleUtterances.txt b/Project/speech_assets/SampleUtterances.txt[m
+[1mindex db3df06..a883c41 100644[m
+[1m--- a/Project/speech_assets/SampleUtterances.txt[m
+[1m+++ b/Project/speech_assets/SampleUtterances.txt[m
+[36m@@ -12,15 +12,15 @@[m [mOrderPizzaIntent  Open GreenApple PizzaCorner[m
+ OrderPizzaIntent  Start GreenApple PizzaCorner[m
+ [m
+ [m
+[31m-YesMenuIntent  I would like to order from Menu[m
+[31m-YesMenuIntent  What's in the Menu[m
+[31m-YesMenuIntent  What is the Menu[m
+[31m-YesMenuIntent  Can you tell me the Menu[m
+[31m-YesMenuIntent  Tell me the Menu[m
+[31m-YesMenuIntent  Please tell me the Menu[m
+[31m-YesMenuIntent  Choose from Menu[m
+[31m-YesMenuIntent  Yes[m
+[31m-YesMenuIntent  Yes I want to know the menu[m
+[32m+[m[32mMenuIntent  I would like to order from Menu[m
+[32m+[m[32mMenuIntent  What's in the Menu[m
+[32m+[m[32mMenuIntent  What is the Menu[m
+[32m+[m[32mMenuIntent  Can you tell me the Menu[m
+[32m+[m[32mMenuIntent  Tell me the Menu[m
+[32m+[m[32mMenuIntent  Please tell me the Menu[m
+[32m+[m[32mMenuIntent  Choose from Menu[m
+[32m+[m[32mMenuIntent  Yes[m
+[32m+[m[32mMenuIntent  Yes I want to know the menu[m
+ [m
+ [m
+ [m
+[1mdiff --git a/Project/src/index.js b/Project/src/index.js[m
+[1mindex 1e80be7..c592665 100644[m
+[1m--- a/Project/src/index.js[m
+[1m+++ b/Project/src/index.js[m
+[36m@@ -40,8 +40,21 @@[m [mvar APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace wi[m
+ [m
+ var http = require('http'),[m
+ [m
+[31m-    alexaDateUtil = require('./AlexaSpreadSheetUtil');[m
+[31m-[m
+[32m+[m[32malexaSheetUtil = require('./AlexaSpreadSheetUtil');[m
+[32m+[m[32mvar GoogleSpreadsheet = require('google-spreadsheet');[m
+[32m+[m[32mvar async = require('async');[m
+[32m+[m
+[32m+[m[32m// Update this line with your Google sheet ID[m
+[32m+[m[32mvar doc = new GoogleSpreadsheet('1axeSHnFyNADHaJxdsG39BAPEa36jdNY01AONaUp8LRU');[m
+[32m+[m[32mvar creds = require('./creds.json');[m
+[32m+[m[32mvar sheet;[m
+[32m+[m[41m [m
+[32m+[m[32masync.series([[m
+[32m+[m[32m  function setAuth(step) {[m
+[32m+[m[32m    // see notes below for authentication instructions![m[41m [m
+[32m+[m[32m    var creds = require('./creds.json');[m
+[32m+[m[32m    doc.useServiceAccountAuth(creds, step);[m
+[32m+[m[32m  }]);[m
+ [m
+ [m
+ /**[m
+[36m@@ -134,9 +147,9 @@[m [mGreenApplePizzaSkill.prototype.intentHandlers = {[m
+ [m
+     },[m
+ [m
+[31m-    "YesMenuIntent": function (intent, session, response) {[m
+[32m+[m[32m    "MenuIntent": function (intent, session, response) {[m
+ [m
+[31m-        handleYesMenuIntentRequest(intent, session, response);[m
+[32m+[m[32m        handleMenuIntentRequest(intent, session, response);[m
+ [m
+     },[m
+     "CustomMenuIntent": function (intent, session, response) {[m
+[36m@@ -290,7 +303,7 @@[m [mfunction handleWelcomeRequest(response) {[m
+ [m
+         };[m
+ [m
+[31m-[m
+[32m+[m[32m    auth_sheet();[m
+ [m
+     response.ask(speechOutput, repromptOutput);[m
+ [m
+[36m@@ -329,7 +342,9 @@[m [mvar repromptText = " Do you want to know the menu card?";[m
+     response.ask(speechOutput, repromptText);[m
+ }[m
+ [m
+[31m-function handleYesMenuIntentRequest(intent, session , response){[m
+[32m+[m[32mfunction handleMenuIntentRequest(intent, session , response){[m
+[32m+[m
+[32m+[m[32m    session.attributes.orderType = "menuorder";[m
+ [m
+     var repromptText = "Which pizza you would like to order? ";[m
+ [m
+[36m@@ -344,6 +359,8 @@[m [mfunction handleYesMenuIntentRequest(intent, session , response){[m
+ }[m
+ function handleCustomMenuIntentRequest(intent, session , response){[m
+ [m
+[32m+[m[32m    session.attributes.orderType = "customorder";[m
+[32m+[m
+     var repromptText = "Please tell your choice of crust. Normal. Thin. Or Brooklyn"; //getCrustList()-integarte with google sheet apis;[m
+ [m
+     var speechOutput = "Lets start making your pizza.   "[m
+[36m@@ -491,7 +508,7 @@[m [mfunction handleSizeDialogRequest(intent, session , response){[m
+ [m
+     if (!size) {[m
+ [m
+[31m-        repromptText = "Please choose from regular, medium or large "[m
+[32m+[m[32m        repromptText = "Please choose from small , medium , large or extralarge "[m
+ [m
+             + "Which size do you want?";[m
+ [m
+[36m@@ -549,10 +566,8 @@[m [mfunction getDispatchOrderRequest(intent, session, response){[m
+ [m
+     var repromptText = "Is this a pickup or delivery order?";[m
+ [m
+[31m-    var speechOutput = " You selected " + session.attributes.menuItem [m
+[31m-    [m
+[31m-    + " with " + session.attributes.size + "size. " [m
+[31m-    [m
+[32m+[m[32m    var speechOutput = " Okay. "[m[41m [m
+[32m+[m
+     + repromptText;[m
+ [m
+     response.ask(speechOutput, repromptText);[m
+[36m@@ -570,15 +585,22 @@[m [mfunction handleDispatchOrderIntentRequest(intent , session , response){[m
+ [m
+             session.attributes.dispatchOption = dispatchOption.value;[m
+ [m
+[31m-             var repromptText = "May I know your location?";[m
+[32m+[m[32m            if(session.attributes.orderType == "menuorder"){[m
+[32m+[m[32m                var repromptText = "May I know your location?";[m
+ [m
+[31m-            var speechOutput = " You selected " + session.attributes.menuItem [m
+[31m-            [m
+[31m-            + " with " + session.attributes.size + "size.  "[m
+[31m-            [m
+[31m-            + repromptText;[m
+[32m+[m[32m                var speechOutput = " You selected " + session.attributes.menuItem[m[41m [m
+[32m+[m[41m                [m
+[32m+[m[32m                + " with " + session.attributes.size + "size.  "[m
+[32m+[m[41m                [m
+[32m+[m[32m                + repromptText;[m
+ [m
+[31m-            response.ask(speechOutput, repromptText);[m
+[32m+[m[32m                response.ask(speechOutput, repromptText);[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m            if(session.attributes.orderType == "customorder"){[m
+[32m+[m
+[32m+[m
+[32m+[m[32m            }[m
+ [m
+         }[m
+     }[m
+[36m@@ -932,6 +954,52 @@[m [mfunction getSupportedLocationsText(){[m
+ [m
+ }[m
+ [m
+[32m+[m[32mfunction auth_sheet(){[m
+[32m+[m
+[32m+[m[32mvar sheet;[m
+[32m+[m[41m [m
+[32m+[m[32masync.series([[m
+[32m+[m[32m  function setAuth(step) {[m
+[32m+[m[32m    // see notes below for authentication instructions![m[41m [m
+[32m+[m[32m    var creds = require('./creds.json');[m
+[32m+[m[32m    doc.useServiceAccountAuth(creds, step);[m
+[32m+[m[32m  },[m
+[32m+[m
+[32m+[m
+[32m+[m[32m  function getInfoAndWorksheets(step) {[m
+[32m+[m[32m    doc.getInfo(function(err, info) {[m
+[32m+[m
+[32m+[m[32m      console.log('Loaded doc: '+info.title+' by '+info.author.email);[m
+[32m+[m[32m      sheet = info.worksheets[0];[m
+[32m+[m[32m      console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);[m
+[32m+[m[32m      step();[m
+[32m+[m[32m    });[m
+[32m+[m[32m  },[m
+[32m+[m
+[32m+[m
+[32m+[m[32m//read the first[m[41m [m
+[32m+[m[32m  function workingWithRows(step) {[m
+[32m+[m[32m    // google provides some query options[m[41m [m
+[32m+[m[32m    sheet.getRows({[m
+[32m+[m[32m      offset: 1,[m
+[32m+[m[32m      limit: 20,[m
+[32m+[m[32m      orderby: 'col2'[m
+[32m+[m[32m    }, function( err, rows ){[m
+[32m+[m[32m      console.log('Read '+rows.length+' rows');[m
+[32m+[m[41m [m
+[32m+[m[32m      // the row is an object with keys set by the column headers[m[41m [m
+[32m+[m[32m      rows[0].colname = 'new val';[m
+[32m+[m[32m      rows[0].save(); // this is async[m[41m [m
+[32m+[m[41m [m
+[32m+[m[32m      // deleting a row[m[41m [m
+[32m+[m[32m      rows[0].del();  // this is async[m[41m [m
+[32m+[m[41m [m
+[32m+[m[32m      step();[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }]);[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m
+ // Create the handler that responds to the Alexa Request.[m
+ [m
+ exports.handler = funct
