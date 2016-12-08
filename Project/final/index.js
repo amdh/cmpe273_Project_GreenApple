@@ -480,7 +480,7 @@ function handleNonVegToppingsMenuIntentRequest(intent, session , response){
      +session.attributes.vegtop + "in vegetarian toppings. " 
      
      + session.attributes.nonvegtop + "in non vegetarian toppings. "
-     + "Total amount of your pizza is : " + session.attributes.amount +". "
+     //+ "Total amount of your pizza is : " + session.attributes.amount +". "
      + repromptText;
 
     response.ask(speechOutput, repromptText);
