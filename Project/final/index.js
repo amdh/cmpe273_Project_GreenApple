@@ -34,7 +34,7 @@
 
  */
 
-var APP_ID = 'amzn1.ask.skill.d8bde69b-47ed-4226-9f3b-18a7b6f6abac';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
+var APP_ID = 'amzn1.ask.skill.067e54bd-33d4-47f1-b503-627b2d097731';//replace with 'amzn1.echo-sdk-ams.app.[your-value]';
 
 
 
@@ -51,8 +51,9 @@ var orderSheet;
 
 
 var AlexaSkill = require('./AlexaSkill');
-
-
+var test
+alexaSheetUtil.google_spreadsheet_custom_menu(function(){}, test)
+console.log(test)
 
 /**
 
@@ -83,10 +84,8 @@ GreenApplePizzaSkill.prototype.constructor = GreenApplePizzaSkill;
 
 
 GreenApplePizzaSkill.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-
-    console.log("onSessionStarted requestId: " + sessionStartedRequest.requestId
-
-        + ", sessionId: " + session.sessionId);
+   
+    console.log("onSessionStarted requestId: " + sessionStartedRequest.requestId + ", sessionId: " + session.sessionId);
 
     // any initialization logic goes here
 
@@ -288,9 +287,6 @@ function handleWelcomeRequest(response) {
             type: AlexaSkill.speechOutputType.PLAIN_TEXT
 
         };
-
-    auth_sheet();
-
     response.ask(speechOutput, repromptOutput);
 
 }
@@ -336,23 +332,35 @@ function handleYesMenuIntentRequest(intent, session , response){
 
         var pizza_name = ""
         menuResponse(speechOutput, function(err, output){
-            speechOutput +=  output + repromptText;
+            session.attributes.pizza_name = output
+            for(var key in output){
+                pizza_name += key +", "
+            }
+            pizza_name = pizza_name.slice(0,-2);
+            pizza_name += ". "
+            speechOutput +=  pizza_name + repromptText;
             response.ask(speechOutput, repromptText);
         });
 }
 function handleCustomMenuIntentRequest(intent, session , response){
 
     session.attributes.orderType = "customorder";
-
-    var repromptText = "Please tell your choice of crust. Normal. Thin. Or Brooklyn"; //getCrustList()-integarte with google sheet apis;
-
-    var speechOutput = "Lets start making your pizza.   "
-
-             + repromptText;
-
-
-
-    response.ask(speechOutput, repromptText);
+    alexaSheetUtil.google_spreadsheet_custom_menu(function(custom_menu){
+        session.attributes.custom_menu = custom_menu
+        var crust = session.attributes.custom_menu["crust"]
+        session.attributes.amount = 0
+        var repromptText = "Please tell your choice of crust. "
+        for (var key in crust){
+           repromptText += key +", " ;   
+      // if (key == "name") doSomething();
+        }
+        repromptText = repromptText.slice(0, -2);
+        repromptText += ". "
+        // Normal. Thin. Or Brooklyn"; //getCrustList()-integarte with google sheet apis;
+        var speechOutput = "Lets start making your pizza.   "
+                 + repromptText;
+        response.ask(speechOutput, repromptText);
+    });
 }
 
 function handleCrustMenuIntentRequest(intent, session , response){
@@ -361,11 +369,19 @@ function handleCrustMenuIntentRequest(intent, session , response){
 
  	var crust = intent.slots.CrustItem;
 	session.attributes.crust  = crust.value;
-
+    session.attributes.amount += parseInt(session.attributes.custom_menu["crust"][crust])
+    var sauces = session.attributes.custom_menu["sauce"]
+    var sauce = ""
+    for (var key in sauces){
+            sauce += key +", " ;   
+      // if (key == "name") doSomething();
+    }
+    sauce = sauce.slice(0,-2);
+    sauce += "."
        
-       var repromptText = "Now please tell your choice of sauce. Marinara. Alfedo. Or Pesto"; //getSauceList()-integarte with google sheet apis;
+    var repromptText = "Now please tell your choice of sauce. " + sauce ; //getSauceList()-integarte with google sheet apis;
 
-         var speechOutput = "You selected " + session.attributes.crust +" crust. " + repromptText;
+    var speechOutput = "You selected " + session.attributes.crust +" crust. " + repromptText;
 
     response.ask(speechOutput, repromptText);
 }
@@ -376,9 +392,17 @@ function handleSauceMenuIntentRequest(intent, session , response){
 
  	var sauce = intent.slots.SauceItem;
 	session.attributes.sauce  = sauce.value;
-
+    session.attributes.amount += parseInt(session.attributes.custom_menu["sauce"][sauce])
+    var cheeses = session.attributes.custom_menu["cheese"]
+    var cheese = ""
+    for (var key in cheeses){
+            cheese += key + ", " ;   
+      // if (key == "name") doSomething();
+    }
+    cheese = cheese.slice(0,-2);
+    cheese += "."
        
-     var repromptText = "Now please tell your choice of cheese. Mozarella. Parmesan. and. Parmigiano Reggiano"; //getCheeseList()-integarte with google sheet apis;
+     var repromptText = "Now please tell your choice of cheese. " + cheese
 
          var speechOutput = "You selected " + session.attributes.sauce +" sauce. " + repromptText;
 
@@ -391,9 +415,19 @@ function handleCheeseMenuIntentRequest(intent, session , response){
 
  	var cheese = intent.slots.CheeseItem;
 	session.attributes.cheese  = cheese.value;
+    session.attributes.amount += parseInt(session.attributes.custom_menu["cheese"][cheese])
 
-       
-     var repromptText = "Now please tell your choice of vegetarian toppings. onion. tomato. greenpeppers. jalapeno. olives. mushrooms. or none. "; //getToppingsList()-integarte with google sheet apis;
+    var toppings = session.attributes.custom_menu["vegtopping"]
+    var topping = ""
+    for (var key in toppings){
+            topping += key + ", " ;   
+      // if (key == "name") doSomething();
+    }
+    topping = topping.slice(0,-2);
+    topping += "."
+          
+     var repromptText = "Now please tell your choice of vegetarian toppings. "
+         + topping;
 
          var speechOutput = "You selected " + session.attributes.cheese +" cheese. " + repromptText;
 
@@ -406,9 +440,21 @@ function handleVegToppingsMenuIntentRequest(intent, session , response){
 
  	var vegtop = intent.slots.VegToppingsItem;
 	session.attributes.vegtop  = vegtop.value;
-
+    session.attributes.amount += parseInt(session.attributes.custom_menu["vegtopping"][vegtop])
+    
+    var toppings = session.attributes.custom_menu["nonvegtopping"]
+    var topping = ""
+    for (var key in toppings){
+            topping += key + ", " ;   
+      // if (key == "name") doSomething();
+    }
+    topping = topping.slice(0,-2);
+    topping += "."
+          
+     var repromptText = "Now please tell your choice of vegetarian toppings. "
+         + topping;
        
-     var repromptText = ". Now please tell your choice of non vegetarian toppings. ham. pepperoni. bacon. chicken. none. "; //getVegToppingsList()-integarte with google sheet apis;
+     var repromptText = ". Now please tell your choice of non vegetarian toppings. "+ topping;
 
          var speechOutput = "For vegetarian toppings you selected. " + session.attributes.vegtop + repromptText;
 
@@ -422,7 +468,7 @@ function handleNonVegToppingsMenuIntentRequest(intent, session , response){
 
 	session.attributes.nonvegtop  = nonvegtop.value;
 
-    var repromptText = "Which size do you want ?";
+    var repromptText = "which size do you want ?";
 
       
      var speechOutput = "Your custom pizza is. "+ session.attributes.crust 
@@ -433,8 +479,8 @@ function handleNonVegToppingsMenuIntentRequest(intent, session , response){
      
      +session.attributes.vegtop + "in vegetarian toppings. " 
      
-     + session.attributes.nonvegtop + "in non vegetarian toppings. " 
-     
+     + session.attributes.nonvegtop + "in non vegetarian toppings. "
+     + "Total amount of your pizza is : " + session.attributes.amount +". "
      + repromptText;
 
     response.ask(speechOutput, repromptText);
@@ -1047,27 +1093,7 @@ var size = intent.slots.size;
             displaySize : val
         }
 
-        /*if (STATIONS[cityName.toLowerCase()]) {
-
-            return {
-
-                city: cityName,
-
-                station: STATIONS[cityName.toLowerCase()]
-
-            }
-
-        } else {
-
-            return {
-
-                error: true,
-
-                city: cityName
-
-            }*/
-
-        }
+    }
 
 }
 
