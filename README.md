@@ -1,5 +1,5 @@
 # cmpe273_Project_GreenApple
-project for semester1
+Project demonstrates alexa skill sets for pizza ordering system
 
 #Project Topic : Amazon Echo-enabled Pizza Ordering System
 
